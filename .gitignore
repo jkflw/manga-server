@@ -1,0 +1,5 @@
+*.pyc
+madokami_data.json
+madokami_data2.json
+app.log
+database.db

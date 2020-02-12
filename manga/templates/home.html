@@ -1,0 +1,32 @@
+{% load static %}
+<head>
+  <link href="{% static "/base.css" %}" rel="stylesheet">
+  <link href="{% static "/search.css" %}" rel="stylesheet">
+  <script src="{% static "/autocomplete.js" %}"></script>
+</head>
+<body>
+  <form id="search-form" autocomplete="off" action="/search">
+    <div class="autocomplete" style="width: 20%;">
+      <input id="title-search-input" type="text" placeholder="Search..." name="search_text">
+    </div>
+    <input type="submit">
+  </form>
+  <h1>
+    <a href="/manga">Manga Directory View</a>
+  </h1>
+  <div>
+    <h2>Watched Series</h2>
+    {% for series in watched %}
+      {% if series.image %}
+        <a href="/manga/{{ series.path | safe }}" >
+          <img title="{{ series.title }}" src="data:image/jpeg;base64,{{ series.image }}" />
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <script type="text/javascript">
+    const all_titles = {{ all_titles | safe }};
+    autocomplete(document.getElementById('title-search-input'), all_titles);
+  </script>
+</body>
+

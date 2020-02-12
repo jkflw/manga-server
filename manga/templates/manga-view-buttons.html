@@ -1,0 +1,61 @@
+{% load static %}
+<head>
+  <link href="{% static "/base.css" %}" rel="stylesheet">
+  <script src="{% static "/manga-view-buttons.js" %}"></script>
+  <script id="total_pages" id-data="{{total_pages}}"></script>
+  <script id="begin_page" id-data="{{begin_page}}"></script>
+  <script id="end_page" id-data="{{end_page}}"></script>
+  <script id="directory" id-data="{{directory|urlencode}}"></script>
+  <script id="current_chapter" id-data="{{current_chapter|urlencode}}"></script>
+  <link href="{% static "/manga-view-buttons.css" %}" rel="stylesheet">
+</head>
+<body>
+  <h1>
+    <a href="/manga/">/</a>
+    {% for dir_part in directory_parts %}
+      <a href="/manga{{ dir_part.full_path }}">{{ dir_part.directory }}</a> <font>/</font>
+    {% endfor %}
+  </h1>
+  <div>
+    <button onclick="previousClicked()" class="previous">&laquo; Previous Page</button>
+    <button onclick="nextClicked()" class="next">Next Page &raquo;</button>
+    <br/>
+    <br/>
+    <div>
+      <font style="font-size: 20px;">
+        Page Size:
+      </font>
+      <select class="manga-pageSize-select" onchange="pageSizeChanged(this)">
+        <option value="9999">All</option>
+        <option value="100">100</option>
+        <option value="50">50</option>
+        <option value="25">25</option>
+        <option value="10">10</option>
+        <option value="5">5</option>
+        <option value="1">1</option>
+      </select>
+      <font style="font-size: 20px;">
+        Displayed Pages:
+      </font>
+      <select class="manga-page-select" onchange="pageSelectChanged(this)">
+      </select>
+      <font style="font-size: 20px;">
+        Total Pages: {{ total_pages }}
+      </font>
+    </div>
+    <br/>
+    <div>
+      <font style="font-size: 20px;">
+        Chapter:
+      </font>
+      <select class="manga-chapter-select" onchange="chapterSelectChanged(this, '{{directory|urlencode}}')">
+      {% for chapter in chapter_list %}
+        <option value="{{chapter|urlencode}}">{{chapter}}</option>
+      {% endfor %}
+      </select>
+    </div>
+  </div>
+  <script type="text/javascript">
+    setupPage();
+  </script>
+</body>

@@ -1,0 +1,54 @@
+button {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 24px;
+    font-size: 1.5vw;
+}
+
+button:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.previous {
+    background-color: #f1f1f1;
+    color: black;
+    width: 40%;
+    height: 5%;
+}
+
+.previous-chapter {
+    background-color: #f1f1f1;
+    color: black;
+    width: 40%;
+    height: 5%;
+}
+
+.next {
+    background-color: #4CAF50;
+    color: white;
+    width: 40%;
+    height: 5%;
+}
+
+.next-chapter {
+    background-color: #4c8faf;
+    color: white;
+    width: 40%;
+    height: 5%;
+}
+
+.round {
+    border-radius: 50%;
+}
+
+select {
+  height: 50px;
+  width: 150px;
+  font-size: 20px;
+}
+
+.manga-chapter-select {
+  width: auto;
+}

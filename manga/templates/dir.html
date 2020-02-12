@@ -1,0 +1,74 @@
+{% load static %}
+<head>
+  <link href="{% static "/base.css" %}" rel="stylesheet">
+  <link href="{% static "/search.css" %}" rel="stylesheet">
+  <script src="{% static "/autocomplete.js" %}"></script>
+  <script src="{% static "/watch.js" %}"></script>
+</head>
+<body>
+  <form id="search-form" autocomplete="off" action="/search">
+    <div class="autocomplete" style="width: 20%;">
+      <input id="title-search-input" type="text" placeholder="Search..." name="search_text">
+    </div>
+    <input type="submit">
+  </form>
+  <h1>
+    <a href="/">Home</a>
+  </h1>
+  <h1>
+    <a href="/manga">/</a>
+    {% for dir_part in directory_parts %}
+      <a href="/manga{{ dir_part.full_path }}">{{ dir_part.directory }}</a> /
+    {% endfor %}
+  </h1>
+  <div>
+    {% if is_series_path %}
+      <button class="tag tag-category" onclick="watch('{{ dir | safe }}')">Watch</button>
+      <button class="tag tag-category" onclick="unwatch('{{ dir | safe }}')">Unwatch</button>
+      <div id="series_info" class="manga-info">
+        <h2>
+          <span class="title">{{ title }}</span>
+          <span class="year">{{ year }}</span>
+          <a href="{{ manga_updates_link }}">Info</a>
+        </h2>
+        <p class="staff">
+          {% for author in authors %}
+            <a href="/search/?authors={{ author }}">{{ author }}</a>
+          {% endfor %}
+        </p>
+        {% if manga_image %}
+          <img src="data:image/jpeg;base64,{{ manga_image }}" /><br/>
+        {% endif %}
+        <h3>
+          Genres
+        </h3>
+        {% for genre in genres %}
+          <a class="tag" href="/search/?genres={{ genre }}">{{ genre }}</a>
+        {% endfor %}
+        <h3>
+          Tags
+        </h3>
+        {% for tag in tags %}
+          <a class="tag tag-category" href="/search/?tags={{ tag }}">{{ tag }}</a>
+        {% endfor %}
+        <!-- TODO related series -->
+        <h4>
+          Completely Scanlated?
+        </h4>
+        <span class="scanstatus">{{ completely_scanlated }}</span>
+      </div>
+    {% endif %}
+    <div id="dir_list">
+      <ul>
+        {% for dir in dirs %}
+          <li><a href="/manga/{{ current_dir }}/{{ dir }}">{{ dir }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <script type="text/javascript">
+    const all_titles = {{ all_titles | safe }};
+    autocomplete(document.getElementById('title-search-input'), all_titles);
+  </script>
+</body>
+

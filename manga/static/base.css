@@ -1,0 +1,48 @@
+a {
+  color: #e96a81;
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: inherit;
+}
+
+h2, h3, h4 {
+  font-weight: inherit;
+}
+
+html {
+  color: #e3c2b3;
+  font-family: 'Open Sans', 'ＭＳ Ｐゴシック', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: #e3c2b3;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #171717;
+}
+
+.tag {
+  display: inline-block;
+  margin: 0 4px 4px 0;
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: all 100ms;
+  text-decoration: none;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 1);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+  background: rgba(223, 153, 247, 0.6);
+}
+
+.tag.tag-category {
+  background: rgba(141, 166, 206, 0.6);
+}
+
+.manga-info {
+  width: 248px;
+  margin 0 auto 20px;
+}

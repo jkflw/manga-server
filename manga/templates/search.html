@@ -1,0 +1,39 @@
+{% load static %}
+<head>
+  <link href="{% static "/base.css" %}" rel="stylesheet">
+  <link href="{% static "/search.css" %}" rel="stylesheet">
+  <script src="{% static "/autocomplete.js" %}"></script>
+  <script src="{% static "/search.js" %}"></script>
+</head>
+<body>
+  <form id="search-form" autocomplete="off" action="/search">
+    <div class="autocomplete" style="width: 20%;">
+      <input id="title-search-input" type="text" placeholder="Search..." name="search_text">
+      <input id="tag-search-input" type="text" placeholder="Tags..." name="tags">
+      <input id="genre-search-input" type="text" placeholder="Genres..." name="genres">
+      <input id="author-search-input" type="text" placeholder="Authors..." name="authors">
+    </div>
+    <input type="submit">
+  </form>
+  <table>
+    {% for path in paths %}
+      <tr>
+        <td><a href="{{ path.full_path }}"><strong>{{ path.title }}</strong></a></td>
+        <td><a href="{{ path.full_path }}">{{ path.full_path }}</a></td>
+      </tr>
+    {% endfor %}
+  </table>
+  <script type="text/javascript">
+    const all_tags = {{ all_tags | safe }};
+    const all_genres = {{ all_genres | safe }};
+    const all_titles = {{ all_titles | safe }};
+    const all_authors = {{ all_authors | safe }};
+    autocomplete(document.getElementById('title-search-input'), all_titles);
+    autocomplete(document.getElementById('tag-search-input'), all_tags);
+    autocomplete(document.getElementById('genre-search-input'), all_genres);
+    autocomplete(document.getElementById('author-search-input'), all_authors);
+    setupPage();
+  </script>
+</body>
+
+
